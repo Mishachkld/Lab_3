@@ -1,19 +1,38 @@
 //
 // Created by Mishach on 28.02.2023.
 //
-
 #pragma once
+#include <iostream>
+#include <algorithm>
+
+
 
 namespace cn {
     class ComplexNumber {
     public:
-        ComplexNumber(int a, int b);
-        ComplexNumber(ComplexNumber& temp);
+        ComplexNumber(double a, double b);
+        ComplexNumber(const ComplexNumber& temp);
         ~ComplexNumber() = default;
 
+        ///Functions
+
+        ///Overrated
+        ComplexNumber& operator += (const ComplexNumber& temp);
+        ComplexNumber& operator *= (const ComplexNumber& temp);
+        ComplexNumber& operator = (const ComplexNumber& temp);
+        ComplexNumber operator + (const ComplexNumber& temp) const;
+        ComplexNumber operator * (const ComplexNumber& temp);
+        ComplexNumber& operator ++ (int i);
+
+        friend std::ostream& operator << (std::ostream& outStream, const ComplexNumber& temp);
+        friend std::istream& operator >> (std::istream &inputStream, ComplexNumber &temp);
+
     private:
-        int a;
-        int b;
+        double a;
+        double b;
+
+
+
     };
 
 }
