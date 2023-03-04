@@ -13,6 +13,7 @@ namespace cn {
         b = temp.b;
     }
 
+    ComplexNumber::ComplexNumber(double a) : a(a), b(0) { }
 
     ComplexNumber ComplexNumber::operator+(const ComplexNumber &temp) const {  // почему const
         ComplexNumber newNumber(temp.a + a, temp.b + b);
@@ -20,14 +21,14 @@ namespace cn {
     }
     ///a*a1 + a*b1*i + a1*b*i - b*b1
     ComplexNumber ComplexNumber::operator*(const ComplexNumber &temp) {
-        a *= temp.a * a - temp.b * b;
-        b += temp.a * b + a * temp.b;
-        return *this;
+        ComplexNumber newNumber = temp;
+        newNumber.a *= temp.a * a - temp.b * b;
+        newNumber.b += temp.a * b + a * temp.b;
+        return newNumber;
     }
 
     ComplexNumber &ComplexNumber::operator*=(const ComplexNumber &temp) {
-        a *= temp.a * a - temp.b * b;
-        b += temp.a * b + a * temp.b;
+        *this = *this * temp;
         return *this;
     }
 
@@ -60,6 +61,8 @@ namespace cn {
         inputStream >> temp.a >> temp.b;
         return inputStream;
     }
+
+
 
 
 }
